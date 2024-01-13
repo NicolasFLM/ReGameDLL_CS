@@ -497,7 +497,7 @@ void AttackState::OnUpdate(CCSBot *me)
 		float maxRange = me->GetCombatRange() + hysterisRange;
 
 		// move towards (or away from) enemy if we are using a knife, behind a corner, or we aren't very skilled
-		if (me->GetProfile()->GetSkill() < 0.66f || !me->IsEnemyVisible())
+		if (me->GetProfile()->GetSkill() < 0.5f || !me->IsEnemyVisible())
 		{
 			if (range > maxRange)
 				me->MoveForward();

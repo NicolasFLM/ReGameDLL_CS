@@ -128,7 +128,11 @@ void CCSBot::FireWeaponAtEnemy()
 				if (IsUsingPistol())
 				{
 					// high-skill bots fire their pistols quickly at close range
+#ifndef REGAMEDLL_FIXES
 					const float closePistolRange = 999999.9f;
+#else
+					const float closePistolRange = 360.0f;
+#endif
 					if (GetProfile()->GetSkill() > 0.75f && rangeToEnemy < closePistolRange)
 					{
 						StartRapidFire();
@@ -791,7 +795,7 @@ void CCSBot::SilencerCheck()
 			return;
 
 		// equip silencer if we want to and we don't have a shield.
-		if (isSilencerOn != (GetProfile()->PrefersSilencer() || GetProfile()->GetSkill() > 0.7f) && !HasShield())
+		if (isSilencerOn != GetProfile()->PrefersSilencer() && !HasShield())
 #endif
 		{
 			PrintIfWatched("%s silencer!\n", (isSilencerOn) ? "Unequipping" : "Equipping");
@@ -864,7 +868,11 @@ bool CCSBot::IsFriendInLineOfFire()
 	if (result.pHit)
 	{
 		CBasePlayer *pVictim = CBasePlayer::Instance(result.pHit);
-		if (pVictim && pVictim->IsPlayer() && pVictim->IsAlive())
+		if (pVictim && pVictim->IsAlive()
+#ifndef REGAMEDLL_FIXES
+			&& pVictim->IsPlayer()
+#endif
+			)
 		{
 			if (BotRelationship(pVictim) == BOT_TEAMMATE)
 				return true;

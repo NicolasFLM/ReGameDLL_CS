@@ -768,12 +768,30 @@ void CCSBot::Update()
 		ClearMovement();
 	}
 
+#ifdef REGAMEDLL_FIXES
+	if (IsActiveWeaponReloading())
+	{
+		// Low skill bots stops to reload, unless they see an enemy
+		if (GetProfile()->GetSkill() < 0.5f && !m_isEnemyVisible)
+		{
+			ResetStuckMonitor();
+			ClearMovement();
+		}
+		// High skill bots don't stop to reload, switch to pistol if they see an enemy
+		else
+		{
+			if (m_isEnemyVisible && !IsUsingPistol() && !IsPistolEmpty())
+				EquipPistol();
+		}
+	}
+#else
 	// don't move while reloading unless we see an enemy
 	if (IsReloading() && !m_isEnemyVisible)
 	{
 		ResetStuckMonitor();
 		ClearMovement();
 	}
+#endif
 
 	// if we get too far ahead of the hostages we are escorting, wait for them
 	if (!IsAttacking() && m_inhibitWaitingForHostageTimer.IsElapsed())

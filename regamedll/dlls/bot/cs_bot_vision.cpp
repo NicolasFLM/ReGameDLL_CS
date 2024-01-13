@@ -253,7 +253,7 @@ bool CCSBot::IsVisible(CBasePlayer *pPlayer, bool testFOV, unsigned char *visPar
 	if ((pPlayer->pev->flags & FL_NOTARGET) || (pPlayer->pev->effects & EF_NODRAW))
 		return false;
 #endif
-	
+
 	Vector spot = pPlayer->pev->origin;
 	unsigned char testVisParts = NONE;
 
@@ -760,6 +760,7 @@ CBasePlayer *CCSBot::FindMostDangerousThreat()
 			if (!IsVisible(pPlayer, CHECK_FOV, &visParts))
 				continue;
 
+/*
 #ifdef REGAMEDLL_ADD
 			// do we notice this enemy? (always notice current enemy)
 			if (pPlayer != currentThreat)
@@ -770,6 +771,7 @@ CBasePlayer *CCSBot::FindMostDangerousThreat()
 				}
 			}
 #endif
+*/
 
 			// update watch timestamp
 			int idx = pPlayer->entindex() - 1;

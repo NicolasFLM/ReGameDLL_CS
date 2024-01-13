@@ -444,6 +444,23 @@ void BotProfileManager::Init(const char *filename, unsigned int *checksum)
 					profile->m_teams = BOT_TEAM_ANY;
 				}
 			}
+#ifdef REGAMEDLL_ADD
+			else if (!Q_stricmp("PrefersSilencer", attributeName))
+			{
+				if (!Q_stricmp(token, "True"))
+				{
+					profile->m_prefersSilencer = true;
+				}
+				else if (!Q_stricmp(token, "Random"))
+				{
+					profile->m_prefersSilencer = RANDOM_LONG(0, 1);
+				}
+				else
+				{
+					profile->m_prefersSilencer = false;
+				}
+			}
+#endif
 			else
 			{
 				CONSOLE_ECHO("Error parsing %s - unknown attribute '%s'\n", filename, attributeName);
