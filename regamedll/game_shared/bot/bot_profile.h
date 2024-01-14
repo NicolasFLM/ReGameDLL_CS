@@ -173,7 +173,7 @@ inline void BotProfile::Inherit(const BotProfile *parent, const BotProfile *base
 	if (parent->m_voiceBank != baseline->m_voiceBank)
 		m_voiceBank = parent->m_voiceBank;
 
-#ifdef REGAMEDLL_ADD
+#ifdef REGAMEDLL_FIXES
 	if (parent->m_prefersSilencer != baseline->m_prefersSilencer)
 		m_prefersSilencer = parent->m_prefersSilencer;
 #endif

@@ -269,6 +269,17 @@ void BotProfileManager::Init(const char *filename, unsigned int *checksum)
 			}
 
 			profile->m_name = CloneString(SharedGetToken());
+
+#ifndef REGAMEDLL_FIXES
+			// HACK HACK
+			// Until we have a generalized means of storing bot preferences, we're going to hardcode the bot's
+			// preference towards silencers based on his name.
+			if (profile->m_name[0] % 2)
+
+			{
+				profile->m_prefersSilencer = true;
+			}
+#endif
 		}
 
 		// read attributes for this profile
@@ -432,7 +443,7 @@ void BotProfileManager::Init(const char *filename, unsigned int *checksum)
 					profile->m_teams = BOT_TEAM_ANY;
 				}
 			}
-#ifdef REGAMEDLL_ADD
+#ifdef REGAMEDLL_FIXES
 			else if (!Q_stricmp("PrefersSilencer", attributeName))
 			{
 				if (!Q_stricmp(token, "True"))
