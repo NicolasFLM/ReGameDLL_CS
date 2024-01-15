@@ -289,7 +289,11 @@ void BuyState::OnUpdate(CCSBot *me)
 		bool isPreferredAllDisallowed = true;
 
 		// try to buy our preferred weapons first
-		if (m_prefIndex < me->GetProfile()->GetWeaponPreferenceCount())
+		if (m_prefIndex < me->GetProfile()->GetWeaponPreferenceCount()
+#ifdef REGAMEDLL_ADD
+			&& cv_bot_randombuy.value == 0.0f
+#endif
+			)
 		{
 			// need to retry because sometimes first buy fails??
 			const int maxPrefRetries = 2;
@@ -395,6 +399,13 @@ void BuyState::OnUpdate(CCSBot *me)
 				const float sniperRifleChance = 50.0f;
 				bool wantSniper = (RANDOM_FLOAT(0, 100) < sniperRifleChance) ? true : false;
 
+#ifdef REGAMEDLL_ADD
+				if (cv_bot_randombuy.value != 0.0f)
+				{
+					wantSniper = true;
+				}
+#endif
+
 				for (int i = 0; i < MAX_BUY_WEAPON_PRIMARY; i++)
 				{
 					if ((masterPrimary[i].type == SHOTGUN && TheCSBots()->AllowShotguns())
@@ -413,7 +424,11 @@ void BuyState::OnUpdate(CCSBot *me)
 					int which;
 
 					// on hard difficulty levels, bots try to buy preferred weapons on the first pass
-					if (m_retries == 0 && TheCSBots()->GetDifficultyLevel() >= BOT_HARD)
+					if (m_retries == 0 && TheCSBots()->GetDifficultyLevel() >= BOT_HARD
+#ifdef REGAMEDLL_ADD
+						&& cv_bot_randombuy.value == 0.0f
+#endif
+						)
 					{
 						// count up available preferred weapons
 						int prefCount = 0;

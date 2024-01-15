@@ -807,6 +807,11 @@ void CCSBot::SilencerCheck()
 // Invoked when in contact with a CWeaponBox
 void CCSBot::OnTouchingWeapon(CWeaponBox *box)
 {
+#ifdef REGAMEDLL_ADD
+	// we are buying at random, ignore weapons on the ground
+	if (cv_bot_randombuy.value != 0.0f)
+		return;
+#endif
 	auto pDroppedWeapon = box->m_rgpPlayerItems[PRIMARY_WEAPON_SLOT];
 
 	// right now we only care about primary weapons on the ground
