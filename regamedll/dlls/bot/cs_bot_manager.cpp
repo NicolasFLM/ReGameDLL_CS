@@ -402,11 +402,6 @@ void CCSBotManager::ServerCommand(const char *pcmd)
 			if (FNullEnt(pPlayer->pev))
 				continue;
 
-#ifdef REGAMEDLL_FIXES
-			if (!pPlayer->IsAlive())
-				continue;
-#endif
-
 			const char *name = STRING(pPlayer->pev->netname);
 			if (FStrEq(name, ""))
 				continue;
@@ -415,9 +410,6 @@ void CCSBotManager::ServerCommand(const char *pcmd)
 			{
 				if (killThemAll || FStrEq(name, msg))
 				{
-#ifdef REGAMEDLL_FIXES
-					pPlayer->pev->frags++;
-#endif
 					pPlayer->Kill();
 				}
 			}
