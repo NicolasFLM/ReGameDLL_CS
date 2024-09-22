@@ -451,11 +451,6 @@ void BotProfileManager::Init(const char *filename, unsigned int *checksum)
 				{
 					profile->m_prefersSilencer = true;
 				}
-				else if (!Q_stricmp(token, "Random"))
-				{
-					profile->m_prefersSilencer = RANDOM_LONG(0, 1);
-				}
-				else
 				{
 					profile->m_prefersSilencer = false;
 				}

@@ -134,12 +134,9 @@ void Bot_RegisterCVars()
 	CVAR_REGISTER(&cv_bot_quota_mode);
 	CVAR_REGISTER(&cv_bot_join_delay);
 	CVAR_REGISTER(&cv_bot_freeze);
-<<<<<<< HEAD
 	CVAR_REGISTER(&cv_bot_randombuy);
-=======
 	CVAR_REGISTER(&cv_bot_mimic);
 	CVAR_REGISTER(&cv_bot_mimic_yaw_offset);
->>>>>>> upstream/master
 #endif
 
 }
