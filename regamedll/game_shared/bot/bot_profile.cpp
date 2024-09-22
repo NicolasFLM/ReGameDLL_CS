@@ -451,6 +451,7 @@ void BotProfileManager::Init(const char *filename, unsigned int *checksum)
 				{
 					profile->m_prefersSilencer = true;
 				}
+				else
 				{
 					profile->m_prefersSilencer = false;
 				}
