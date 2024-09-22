@@ -63,6 +63,8 @@ extern cvar_t cv_bot_quota_mode;
 extern cvar_t cv_bot_join_delay;
 extern cvar_t cv_bot_freeze;
 extern cvar_t cv_bot_randombuy;
+extern cvar_t cv_bot_mimic;
+extern cvar_t cv_bot_mimic_yaw_offset;
 #else
 extern cvar_t cv_bot_quota_match;
 #endif
